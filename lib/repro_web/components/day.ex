@@ -3,22 +3,22 @@ defmodule ReproWeb.Component.Day do
 
   @impl true
   def update(%{data: data}, socket) do
-    {:ok, assign(socket, data: data)}
+    {:ok, stream(socket, :data, data, reset: true)}
   end
 
   def update(assigns, socket) do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign_new(:data, fn -> [] end)}
+     |> stream(:data, [])}
   end
 
   @impl true
   def render(assigns) do
     ~H"""
-    <div id={@id}>
-      <div :for={data <- @data} id={data.id}>
-        <%= inspect(@data) %>
+    <div id={@id} phx-update="stream">
+      <div :for={{id, data} <- @streams.data} id={id}>
+        <%= id %>: <%= inspect(data) %>
       </div>
     </div>
     """
