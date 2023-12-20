@@ -1,7 +1,7 @@
 defmodule ReproWeb.Component.Calendar do
   use ReproWeb, :live_component
 
-  @child_count 100
+  @child_count 200
 
   @impl true
   def update(assigns, socket) do
