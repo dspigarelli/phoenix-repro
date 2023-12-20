@@ -20,6 +20,14 @@ defmodule ReproWeb.Router do
     get "/", PageController, :home
   end
 
+  live_session :repro_web do
+    scope "/", ReproWeb.Live do
+      pipe_through :browser
+
+      live "/repro", ReproLive, :index
+    end
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", ReproWeb do
   #   pipe_through :api
